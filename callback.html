@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TikTok 연결 완료 | 홍보자동화 V4</title>
+  <style>
+    body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f8;color:#111;margin:0;padding:40px 18px}
+    .card{max-width:680px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+    h1{font-size:24px;margin:0 0 12px}.muted{color:#666;line-height:1.7}.box{margin-top:18px;padding:14px;background:#f3f4f6;border-radius:10px;word-break:break-all;font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>TikTok 연결 응답을 받았습니다.</h1>
+    <p class="muted">이 페이지는 홍보자동화 V4의 TikTok 로그인/권한 연결 과정에서 사용되는 콜백 페이지입니다.</p>
+    <p class="muted">현재는 개발 및 심사용 페이지이며, 실제 프로그램 연결 단계에서 인증 코드를 안전하게 처리하도록 연동됩니다.</p>
+    <div id="status" class="box">응답 정보를 확인하는 중입니다.</div>
+  </main>
+  <script>
+    const p = new URLSearchParams(location.search);
+    const code = p.get('code');
+    const err = p.get('error') || p.get('error_description');
+    const state = p.get('state');
+    const el = document.getElementById('status');
+    if (err) {
+      el.textContent = 'TikTok 인증 과정에서 오류가 반환되었습니다: ' + err;
+    } else if (code) {
+      el.textContent = '인증 코드가 정상적으로 반환되었습니다. 홍보자동화 V4 프로그램으로 돌아가 연결을 계속하세요.' + (state ? ' (state 확인됨)' : '');
+    } else {
+      el.textContent = 'TikTok 인증을 시작하면 이 페이지로 결과가 반환됩니다.';
+    }
+  </script>
+</body>
+</html>
